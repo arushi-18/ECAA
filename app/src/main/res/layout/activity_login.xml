@@ -15,7 +15,7 @@
         android:src="@drawable/applogo" />
 
     <EditText
-        android:id="@+id/login_phone_number_input"
+        android:id="@+id/login_email_input"
         style="@android:style/Widget.DeviceDefault.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         style="@android:style/Widget.DeviceDefault.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_phone_number_input"
+        android:layout_below="@+id/login_email_input"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"

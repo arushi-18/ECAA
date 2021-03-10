@@ -7,32 +7,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
-    private Button signInBtn,signUpBtn;
+public class ChoiceActivity extends AppCompatActivity {
+    private Button customerBtn,sellerBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_choice);
 
-        signInBtn=(Button)findViewById(R.id.sign_in_btn);
-        signUpBtn=(Button)findViewById(R.id.sign_up_btn);
+        customerBtn=(Button)findViewById(R.id.sign_in_btn);
+        sellerBtn=(Button)findViewById(R.id.sign_up_btn);
 
-        signUpBtn.setOnClickListener(new View.OnClickListener(){
+        customerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent=new Intent(MainActivity.this,ChoiceActivity.class);
+                Intent intent=new Intent(ChoiceActivity.this,RegisterActivity.class);
                 startActivity(intent);
             }
         });
 
-        signInBtn.setOnClickListener(new View.OnClickListener(){
+        sellerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent=new Intent(ChoiceActivity.this,seller_register.class);
                 startActivity(intent);
             }
         });
     }
-
-
 }

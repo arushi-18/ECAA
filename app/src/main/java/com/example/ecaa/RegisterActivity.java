@@ -27,6 +27,7 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
     private EditText InputName,InputPhoneNumber,InputPassword,InputEmail;
     private ProgressDialog loadingBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
             loadingBar.setTitle("Create Account");
             loadingBar.setMessage("Please wait while we check credentials!");
             loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
             String CleanEmail= email.replaceAll("\\.",",");
             byte[] encodePassword = Base64.encode(password.getBytes(), Base64.DEFAULT);
             validateDetails(CleanEmail,name, Arrays.toString(encodePassword),phone);
