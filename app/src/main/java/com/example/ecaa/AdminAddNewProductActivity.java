@@ -29,9 +29,9 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 
 public class AdminAddNewProductActivity extends AppCompatActivity {
-    private String CategoryName,Description,Price,Pname,Psubcat,Pqty;
+    private String CategoryName,SubCategoryName,Description,Price,Pname,Pqty;
     private ImageView InputProductImage;
-    private EditText InputProductName,InputProductDescription,InputProductPrice,InputProductSubCategory,InputProductQuantity;
+    private EditText InputProductName,InputProductDescription,InputProductPrice,InputProductQuantity;
     private static final int GalleryPick=1;
     private Uri ImageUri;
     private String productRandomKey,downloadImageUrl;
@@ -45,6 +45,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_add_new_product);
 
         CategoryName=getIntent().getExtras().get("category").toString();
+        if(CategoryName.equals("accessories") || CategoryName.equals("electronics") || CategoryName.equals("clothing"))
+            SubCategoryName=getIntent().getExtras().get("SubCategory").toString();
         ProductImagesRef= FirebaseStorage.getInstance().getReference().child("Product Images");
         ProductsRef=FirebaseDatabase.getInstance().getReference().child("Products");
         Toast.makeText(this, CategoryName,Toast.LENGTH_SHORT).show();
@@ -54,7 +56,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         InputProductName= findViewById(R.id.product_name);
         InputProductDescription= findViewById(R.id.product_description);
         InputProductPrice= findViewById(R.id.product_price);
-        InputProductSubCategory= findViewById(R.id.product_sub_category);
         InputProductQuantity= findViewById(R.id.product_qty);
         loadingBar=new ProgressDialog(this);
 
@@ -99,7 +100,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         Description=InputProductDescription.getText().toString();
         Price=InputProductPrice.getText().toString();
         Pname=InputProductName.getText().toString();
-        Psubcat=InputProductSubCategory.getText().toString();
         Pqty=InputProductQuantity.getText().toString();
 
         if(ImageUri==null)
@@ -117,10 +117,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         else if(TextUtils.isEmpty(Pname))
         {
             Toast.makeText(this,"Please write product name! ",Toast.LENGTH_SHORT).show();
-        }
-        else if(TextUtils.isEmpty(Psubcat))
-        {
-            Toast.makeText(this,"Please write product sub-category! ",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(Pqty))
         {
@@ -209,7 +205,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         productMap.put("price",Price);
         productMap.put("p_name",Pname);
         productMap.put("qty",Pqty);
-        productMap.put("sub_category",Psubcat);
+        if(SubCategoryName!=null)
+            productMap.put("sub_category",SubCategoryName);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

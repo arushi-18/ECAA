@@ -26,6 +26,9 @@
         <activity android:name=".seller_register" />
         <activity android:name=".AdminAddNewProductActivity" />
         <activity android:name=".AdminCategoryActivity" />
+        <activity android:name=".AccessoriesCategoryExtension" />
+        <activity android:name=".ClothingCategoryExtension" />
+        <activity android:name=".ElectronicsCategoryExtension" />
     </application>
 
 </manifest>
