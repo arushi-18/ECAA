@@ -97,7 +97,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else if(userData.getUserType().equals("Seller"))
                             {
-                                Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+                                Intent intent=new Intent(LoginActivity.this,SellerChooseCategory.class);
+                                intent.putExtra("seller_email",email);
                                 startActivity(intent);
                             }
                             else if(userData.getUserType().equals("Admin"))

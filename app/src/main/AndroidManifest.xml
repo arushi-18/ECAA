@@ -29,6 +29,11 @@
         <activity android:name=".AccessoriesCategoryExtension" />
         <activity android:name=".ClothingCategoryExtension" />
         <activity android:name=".ElectronicsCategoryExtension" />
+        <activity android:name=".SellerAccessoriesCategoryExtension" />
+        <activity android:name=".SellerChooseCategory" />
+        <activity android:name=".SellerAddProductDetails" />
+        <activity android:name=".SellerClothingCategoryExtension" />
+        <activity android:name=".SellerElectronicsCategoryExtension" />
     </application>
 
 </manifest>
