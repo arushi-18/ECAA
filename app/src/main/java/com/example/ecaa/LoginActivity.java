@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ecaa.Model.Users;
+import com.example.ecaa.Prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -92,7 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                             loadingBar.dismiss();
                             if(userData.getUserType().equals("Customer"))
                             {
-                                Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+                                Intent intent=new Intent(LoginActivity.this,HomeActivityCustomer.class);
+                                Prevalent.currentOnlineUser= userData;
                                 startActivity(intent);
                             }
                             else if(userData.getUserType().equals("Seller"))
