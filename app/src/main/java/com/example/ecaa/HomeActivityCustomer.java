@@ -1,6 +1,7 @@
 package com.example.ecaa;
 
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,17 +22,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-/*import android.support.design.widget.NavigationView;*/
-
 
 import ViewHolder.ProductViewHolder;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,11 +38,23 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
     private AppBarConfiguration mAppBarConfiguration;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    private String type="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_customer);
+
+        type=getIntent().getExtras().get("Admin").toString();
+
+        Intent intent = getIntent();
+        Bundle bundle=intent.getExtras();
+        if(bundle!=null)
+        {
+            type=getIntent().getExtras().get("Admin").toString();
+        }
+
+
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Paper.init(this);
@@ -67,65 +75,23 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-       /* navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-
-                int id=item.getItemId();
-                if(id==R.id.nav_cart){
-
-                }
-                else if(id==R.id.nav_categories)
-                {
-
-                }
-                else if(id==R.id.nav_orders)
-                {
-
-                }
-                else if(id==R.id.nav_settings)
-                {
-
-                }
-                else if(id==R.id.nav_logout)
-                {
-                    Paper.book().destroy();
-                    Intent intent=new Intent (HomeActivityCustomer.this,MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
-
-
-                return false;
-            }
-        });*/
 
         View headerView=navigationView.getHeaderView(0);
         TextView userNameTextView=headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView=headerView.findViewById(R.id.user_profile_image);
-        userNameTextView.setText(Prevalent.currentOnlineUser.getEmail());
+
+        if (!type.equals("Admin"))
+        {
+            userNameTextView.setText(Prevalent.currentOnlineUser.getEmail());
+
+        }
 
         recyclerView=findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-        /*mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_cart, R.id.nav_orders, R.id.nav_categories)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);*/
     }
-
-
-
-
 
     @Override
     protected void onStart() {
@@ -137,12 +103,34 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         FirebaseRecyclerAdapter<Products, ProductViewHolder>adapter=
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull Products model)
+                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull final Products model)
                     {
                         holder.txtProductName.setText(model.getP_name());
                         holder.txtProductDescription.setText(model.getDescription());
                         holder.txtProductPrice.setText("Price =Rs. "+model.getPrice());
                         Picasso.get().load(model.getImage()).into(holder.imageView);
+
+
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                if (type.equals("Admin") )
+                                {
+                                    Intent intent=new Intent(HomeActivityCustomer.this,AdminMaintainProductsActivity.class);
+                                    intent.putExtra("p_id", model.getP_id());
+                                    startActivity(intent);
+
+                                }
+                                /*else
+                                {
+                                    Intent intent=new Intent(HomeActivityCustomer.this,ProductDetailsActivity.class);
+                                    intent.putExtra("P_id",model.getP_id());
+                                    startActivity(intent);
+                                }*/
+
+                            }
+                        });
 
                     }
 
@@ -196,20 +184,5 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         }
         return false;
     }
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item){
-//        int id=item.getItemId();
-//
-//        if (id==R.id.action_settings){
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
+
 }

@@ -27,12 +27,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_image_maintain"
-            android:hint="Product Image"
+            android:hint="Product Name"
             android:textAlignment="center"
             android:textSize="18dp"
             android:padding="12dp"
             android:layout_margin="5dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/Black"
+            android:background="@drawable/inputs"
             />
 
         <EditText
@@ -40,12 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_name_maintain"
-            android:hint="Product Image"
+            android:hint="Product Price"
             android:textAlignment="center"
             android:textSize="18dp"
             android:padding="12dp"
             android:layout_margin="5dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/Black"
+            android:background="@drawable/inputs"
             />
 
         <EditText
@@ -59,8 +61,8 @@
             android:textSize="16dp"
             android:padding="12dp"
             android:layout_margin="5dp"
-            android:textColor="@color/colorPrimaryDark"
-
+            android:textColor="@color/Black"
+            android:background="@drawable/inputs"
             />
         <Button
             android:id="@+id/apply_changes_button"
@@ -73,7 +75,8 @@
             android:textSize="16dp"
             android:padding="12dp"
             android:layout_margin="5dp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/buttons"
 
             />
 

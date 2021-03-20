@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else if(userData.getUserType().equals("Admin"))
                             {
-                                Intent intent=new Intent(LoginActivity.this,AdminCategoryActivity.class);
+                                Intent intent=new Intent(LoginActivity.this,HomeActivityAdmin.class);
                                 startActivity(intent);
                             }
                         }
