@@ -94,7 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                             if(userData.getUserType().equals("Customer"))
                             {
                                 Intent intent=new Intent(LoginActivity.this,HomeActivityCustomer.class);
-                                Prevalent.currentOnlineUser= userData;
+                                Users customerData=snapshot.child("Customers").child(email).getValue(Users.class);
+                                Prevalent.currentOnlineUser= customerData;
                                 startActivity(intent);
                             }
                             else if(userData.getUserType().equals("Seller"))

@@ -45,7 +45,7 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_customer);
 
-        type=getIntent().getExtras().get("Admin").toString();
+        //type=getIntent().getExtras().get("Admin").toString();
 
         Intent intent = getIntent();
         Bundle bundle=intent.getExtras();
@@ -65,8 +65,8 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent=new Intent(HomeActivityCustomer.this, CartActivity.class );
+                startActivity(intent);
             }
         });
 
@@ -122,12 +122,12 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
                                     startActivity(intent);
 
                                 }
-                                /*else
+                                else
                                 {
                                     Intent intent=new Intent(HomeActivityCustomer.this,ProductDetailsActivity.class);
                                     intent.putExtra("P_id",model.getP_id());
                                     startActivity(intent);
-                                }*/
+                                }
 
                             }
                         });
@@ -160,6 +160,8 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id=item.getItemId();
         if(id==R.id.nav_cart){
+            Intent intent=new Intent(HomeActivityCustomer.this,CartActivity.class );
+            startActivity(intent);
 
         }
         else if(id==R.id.nav_categories)
@@ -172,7 +174,8 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         }
         else if(id==R.id.nav_settings)
         {
-
+            Intent intent=new Intent(HomeActivityCustomer.this, SettingsActivity.class);
+            startActivity(intent);
         }
         else if(id==R.id.nav_logout)
         {
