@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class HomeActivityAdmin extends AppCompatActivity {
-    private Button AddProductBtn,MaintainProductBtn,LogoutBtn,CheckNewOrdersBtn;
+    private Button AddProductBtn,MaintainProductBtn,LogoutBtn,CheckNewOrdersBtn,VerifyProductsBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,12 +17,21 @@ public class HomeActivityAdmin extends AppCompatActivity {
         MaintainProductBtn=(Button)findViewById(R.id.maintain_product);
         LogoutBtn=(Button)findViewById(R.id.logout_btn);
         CheckNewOrdersBtn=(Button)findViewById(R.id.check_new_orders);
+        VerifyProductsBtn=(Button)findViewById(R.id.verify_products_btn);
 
 
         AddProductBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent=new Intent(HomeActivityAdmin.this,AdminCategoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        VerifyProductsBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent=new Intent(HomeActivityAdmin.this,ApproveProductsActivity.class);
                 startActivity(intent);
             }
         });

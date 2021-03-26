@@ -38,7 +38,7 @@ public class CartActivity extends AppCompatActivity {
     private TextView txtTotalAmount,txtMsg1;
 
 
-    private int overTotalPrice=0;
+    private int TotalPrice=0;
 
 
     @Override
@@ -59,9 +59,9 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                txtTotalAmount.setText("Total Price= Rs."+String.valueOf(overTotalPrice));
+                txtTotalAmount.setText("Total Price= Rs."+String.valueOf(TotalPrice));
                 Intent intent=new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
-                intent.putExtra("Total Price",String.valueOf(overTotalPrice));
+                intent.putExtra("Total Price",String.valueOf(TotalPrice));
                 startActivity(intent);
                 finish();
 
@@ -74,7 +74,7 @@ public class CartActivity extends AppCompatActivity {
     {
         super.onStart();
 
-        CheckOrderState();
+        CheckOrderStatus();
 
         final DatabaseReference cartListRef= FirebaseDatabase.getInstance().getReference().child("Cart List");
         FirebaseRecyclerOptions<Cart> options=
@@ -88,10 +88,10 @@ public class CartActivity extends AppCompatActivity {
             {
                 holder.txtProductQuantity.setText("Quantity="+model.getQuantity());
                 holder.txtProductPrice.setText("Price="+model.getPrice());
-                holder.txtProductName.setText(model.getPname());
+                holder.txtProductName.setText(model.getP_name());
 
                 int oneTypeProductTPrice=((Integer.valueOf(model.getPrice())))*Integer.valueOf(model.getQuantity());
-                overTotalPrice=overTotalPrice+oneTypeProductTPrice;
+                TotalPrice=TotalPrice+oneTypeProductTPrice;
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -103,13 +103,15 @@ public class CartActivity extends AppCompatActivity {
 
                                 };
                         AlertDialog.Builder builder=new AlertDialog.Builder(CartActivity.this);
-                        builder.setTitle("Cart Title");
+                        builder.setTitle("Cart Options:");
                         builder.setItems(options, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which)
-                            {   if(which==0)
+                            {
+                                if(which==0)
                                 {
-                                    Intent intent=new Intent(CartActivity.this,ProductDetailsActivity.class);
+                                    Intent intent;
+                                    intent = new Intent(CartActivity.this,ProductDetailsActivity.class);
                                     intent.putExtra("p_id",model.getPid());
                                     startActivity(intent);
                                 }
@@ -123,7 +125,8 @@ public class CartActivity extends AppCompatActivity {
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task)
-                                                {   if(task.isSuccessful())
+                                                {
+                                                    if(task.isSuccessful())
                                                     {
                                                         Toast.makeText(CartActivity.this,"Item removed successfully",Toast.LENGTH_SHORT).show();
                                                         Intent intent=new Intent(CartActivity.this, HomeActivityCustomer.class);
@@ -150,7 +153,7 @@ public class CartActivity extends AppCompatActivity {
             public cart_view_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
             {
                View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout,parent,false);
-             ViewHolder.cart_view_holder holder=new ViewHolder.cart_view_holder(view);
+               cart_view_holder holder=new ViewHolder.cart_view_holder(view);
                return holder;
             }
         };
@@ -160,7 +163,7 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
-    private void CheckOrderState()
+    private void CheckOrderStatus()
     {
         DatabaseReference ordersRef;
         ordersRef=FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
@@ -169,7 +172,7 @@ public class CartActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {   if(snapshot.exists())
                 {
-                    String shippingState=snapshot.child("state").getValue().toString();
+                    String shippingState=snapshot.child("status").getValue().toString();
                     String userName=snapshot.child("name").getValue().toString();
                     if(shippingState.equals("Shipped"))
                     {

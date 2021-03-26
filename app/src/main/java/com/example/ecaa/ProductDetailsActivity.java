@@ -5,6 +5,7 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +31,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class ProductDetailsActivity extends AppCompatActivity {
-    private FloatingActionButton addToCartBtn;
+
+    private Button addToCartBtn;
     private ImageView productImage;
     private ElegantNumberButton numberButton;
     private TextView productPrice,productDescription,productName;
@@ -44,7 +46,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         productID = getIntent().getStringExtra("p_id");
 
-        addToCartBtn = (FloatingActionButton) findViewById(R.id.add_product_to_cart_btn);
+        addToCartBtn = (Button) findViewById(R.id.add_product_to_cart_btn);
         numberButton = (ElegantNumberButton) findViewById(R.id.number_btn);
         productImage = (ImageView) findViewById(R.id.product_image_details);
         productName = (TextView) findViewById(R.id.product_name_details);
@@ -94,22 +96,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         final HashMap<String,Object>  cartMap=new HashMap<>();
         cartMap.put("p_id",productID);
-        cartMap.put("pname",productName.getText().toString());
+        cartMap.put("p_name",productName.getText().toString());
         cartMap.put("price",productPrice.getText().toString());
         cartMap.put("date",saveCurrentDate);
         cartMap.put("time",saveCurrentTime);
-        cartMap.put("quantity",numberButton.getNumber());
+        cartMap.put("qty",numberButton.getNumber());
         cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone()).child("Products")
-                .child("p_id").child("p_id")
-                .updateChildren(cartMap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                .child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task)
                     {
                         if(task.isSuccessful())
                         {    cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone()).child("Products")
-                                .child("p_id").child("p_id")
-                                .updateChildren(cartMap)
+                                .child(productID).updateChildren(cartMap)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task)
@@ -136,17 +135,21 @@ public class ProductDetailsActivity extends AppCompatActivity {
         private void getProductDetails(String productID)
         {
             DatabaseReference productsRef= FirebaseDatabase.getInstance().getReference().child("Products");
-            productsRef.child("p_id").addValueEventListener(new ValueEventListener() {
+            productsRef.child(productID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot)
                 {
                     if(snapshot.exists())
                     {
-                        Products products=snapshot.getValue(Products.class);
-                        productName.setText(products.getP_name());
-                        productPrice.setText(products.getPrice());
-                        productDescription.setText(products.getDescription());
-                        Picasso.get().load(products.getImage()).into(productImage);
+                       String shippingStatus= snapshot.child("status").getValue().toString();
+                       if (shippingStatus.equals("shipped"))
+                       {
+                           state="order shipped";
+                       }
+                       else if (shippingStatus.equals("not shipped"))
+                       {
+                           state="order placed";
+                       }
                     }
                 }
 
@@ -163,8 +166,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
-            {   if(snapshot.exists())
-            {
+            {   if(snapshot.exists()){
+
                 String shippingState=snapshot.child("state").getValue().toString();
                 if(shippingState.equals("Shipped"))
                 {

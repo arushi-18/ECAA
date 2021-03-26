@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/rlll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/colorPrimaryDark"
         android:layout_alignParentTop="true">
         <TextView
@@ -50,14 +50,11 @@
 
     <Button
         android:id="@+id/next_btn"
-        android:layout_width="377dp"
-        android:layout_height="67dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="12dp"
         android:text="Next"
+        android:backgroundTint="@color/colorPrimary"
         android:background="@drawable/login"
         android:textAlignment="center"
         android:textColor="@android:color/white"

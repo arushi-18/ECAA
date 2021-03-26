@@ -1,15 +1,15 @@
 package com.example.ecaa.Model;
 
 public class Cart
-{   private String pid,pname,price,quantity;
+{   private String pid,p_name,price,quantity;
 
     public Cart()
     {
     }
-    public Cart(String pid, String pname, String price, String quantity)
+    public Cart(String pid, String p_name, String price, String quantity)
     {
         this.pid=pid;
-        this.pname=pname;
+        this.p_name=p_name;
         this.price=price;
         this.quantity=quantity;
     }
@@ -24,14 +24,14 @@ public class Cart
         this.pid = pid;
     }
 
-    public String getPname()
+    public String getP_name()
     {
-        return pname;
+        return p_name;
     }
 
-    public void setPname(String pname)
+    public void setP_name(String pname)
     {
-        this.pname = pname;
+        this.p_name = p_name;
     }
 
     public String getPrice()

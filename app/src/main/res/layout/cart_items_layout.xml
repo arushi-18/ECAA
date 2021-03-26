@@ -8,7 +8,7 @@
     app:cardElevation="15dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
         android:padding="10dp">
         <TextView
@@ -19,6 +19,7 @@
             android:textColor="@android:color/white"
             android:textSize="14dp"
             android:layout_marginLeft="5dp"
+            android:textStyle="bold"
 
             />
         <TextView
@@ -46,6 +47,7 @@
             android:layout_below="@+id/cart_product_quantity"
             android:gravity="center"
             android:layout_marginTop="10dp"
+
             />
     </RelativeLayout>
 

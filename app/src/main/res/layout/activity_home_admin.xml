@@ -18,7 +18,7 @@
         android:id="@+id/maintain_product"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="360dp"
         android:background="@drawable/buttons"
         android:text="Maintain Product"
         android:textColor="@color/colorText"
@@ -28,7 +28,7 @@
         android:id="@+id/add_products"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="280dp"
         android:background="@drawable/inputs"
         android:text="Add Product"
         android:textColor="@color/colorPrimary"
@@ -38,20 +38,31 @@
         android:id="@+id/check_new_orders"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="440dp"
         android:background="@drawable/inputs"
         android:text="Check new orders"
         android:textColor="@color/colorPrimary"
         android:textSize="25sp" />
 
     <Button
+        android:id="@+id/verify_products_btn"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="520dp"
+        android:background="@drawable/buttons"
+        android:text="Verify Products"
+        android:textColor="@color/colorText"
+        android:textSize="25sp" />
+
+
+    <Button
         android:id="@+id/logout_btn"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:layout_marginTop="560dp"
-        android:background="@drawable/buttons"
+        android:layout_marginTop="600dp"
+        android:background="@drawable/inputs"
         android:text="Logout"
-        android:textColor="@color/colorText"
+        android:textColor="@color/colorPrimary"
         android:textSize="25sp" />
 
 

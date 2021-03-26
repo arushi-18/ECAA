@@ -115,19 +115,18 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
                             @Override
                             public void onClick(View v)
                             {
+                                Intent intent;
                                 if (type.equals("Admin") )
                                 {
-                                    Intent intent=new Intent(HomeActivityCustomer.this,AdminMaintainProductsActivity.class);
-                                    intent.putExtra("p_id", model.getP_id());
-                                    startActivity(intent);
+                                    intent = new Intent(HomeActivityCustomer.this, AdminMaintainProductsActivity.class);
 
                                 }
                                 else
                                 {
-                                    Intent intent=new Intent(HomeActivityCustomer.this,ProductDetailsActivity.class);
-                                    intent.putExtra("P_id",model.getP_id());
-                                    startActivity(intent);
+                                    intent = new Intent(HomeActivityCustomer.this, ProductDetailsActivity.class);
                                 }
+                                intent.putExtra("p_id", model.getP_id());
+                                startActivity(intent);
 
                             }
                         });

@@ -60,7 +60,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity
         }
         else if(TextUtils.isEmpty(addressEditText.getText().toString()))
         {
-            Toast.makeText(this,"Please provide your full address",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please provide your shipping address",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(cityEditText.getText().toString()))
         {
@@ -94,7 +94,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity
         ordersMap.put("city",cityEditText.getText().toString());
         ordersMap.put("date",saveCurrentDate);
         ordersMap.put("time",saveCurrentTime);
-        ordersMap.put("state","not shipped");
+        ordersMap.put("status","not shipped");
 
         ordersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
