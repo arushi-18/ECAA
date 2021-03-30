@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,16 +7,18 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SellerElectronicsCategoryExtension extends AppCompatActivity
+import com.example.ecaa.R;
+
+public class ElectronicsCategoryExtension extends AppCompatActivity
 {
     private ImageView imgAc,imgFridge,imgLaptop,imgMobile,imgTablet,imgTv;
-    private String CategoryName,email;
+    private String CategoryName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller_electronics_category_extension);
+        setContentView(R.layout.activity_electronics_category_extension);
 
         imgAc = (ImageView) findViewById(R.id.product_ac);
         imgFridge = (ImageView) findViewById(R.id.product_fridge);
@@ -24,18 +26,16 @@ public class SellerElectronicsCategoryExtension extends AppCompatActivity
         imgMobile = (ImageView) findViewById(R.id.product_mobile);
         imgTablet = (ImageView) findViewById(R.id.product_tablet);
         imgTv = (ImageView) findViewById(R.id.product_tv);
-        CategoryName=getIntent().getExtras().get("Category").toString();
-        email=getIntent().getExtras().get("seller_email").toString();
+        CategoryName=getIntent().getExtras().get("category").toString();
 
         imgAc.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerElectronicsCategoryExtension.this,SellerAddProductDetails.class);
+                Intent i = new Intent(ElectronicsCategoryExtension.this, AdminAddNewProductActivity.class);
                 i.putExtra("SubCategory","AC");
-                i.putExtra("Category",CategoryName);
-                i.putExtra("seller_email",email);
+                i.putExtra("category",CategoryName);
                 startActivity(i);
             }
         });
@@ -45,10 +45,9 @@ public class SellerElectronicsCategoryExtension extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerElectronicsCategoryExtension.this,SellerAddProductDetails.class);
+                Intent i = new Intent(ElectronicsCategoryExtension.this,AdminAddNewProductActivity.class);
                 i.putExtra("SubCategory","Fridge");
-                i.putExtra("Category",CategoryName);
-                i.putExtra("seller_email",email);
+                i.putExtra("category",CategoryName);
                 startActivity(i);
             }
         });
@@ -58,10 +57,9 @@ public class SellerElectronicsCategoryExtension extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerElectronicsCategoryExtension.this,SellerAddProductDetails.class);
+                Intent i = new Intent(ElectronicsCategoryExtension.this,AdminAddNewProductActivity.class);
                 i.putExtra("SubCategory","Laptop");
-                i.putExtra("Category",CategoryName);
-                i.putExtra("seller_email",email);
+                i.putExtra("category",CategoryName);
                 startActivity(i);
             }
         });
@@ -71,10 +69,9 @@ public class SellerElectronicsCategoryExtension extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerElectronicsCategoryExtension.this,SellerAddProductDetails.class);
+                Intent i = new Intent(ElectronicsCategoryExtension.this,AdminAddNewProductActivity.class);
                 i.putExtra("SubCategory","Mobile");
-                i.putExtra("Category",CategoryName);
-                i.putExtra("seller_email",email);
+                i.putExtra("category",CategoryName);
                 startActivity(i);
             }
         });
@@ -84,10 +81,9 @@ public class SellerElectronicsCategoryExtension extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerElectronicsCategoryExtension.this,SellerAddProductDetails.class);
+                Intent i = new Intent(ElectronicsCategoryExtension.this,AdminAddNewProductActivity.class);
                 i.putExtra("SubCategory","Tablet");
-                i.putExtra("Category",CategoryName);
-                i.putExtra("seller_email",email);
+                i.putExtra("category",CategoryName);
                 startActivity(i);
             }
         });
@@ -97,10 +93,9 @@ public class SellerElectronicsCategoryExtension extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerElectronicsCategoryExtension.this,SellerAddProductDetails.class);
+                Intent i = new Intent(ElectronicsCategoryExtension.this,AdminAddNewProductActivity.class);
                 i.putExtra("SubCategory","TV");
-                i.putExtra("Category",CategoryName);
-                i.putExtra("seller_email",email);
+                i.putExtra("category",CategoryName);
                 startActivity(i);
             }
         });

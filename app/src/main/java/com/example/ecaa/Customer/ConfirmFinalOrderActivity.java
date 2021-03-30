@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ecaa.Prevalent.Prevalent;
+import com.example.ecaa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,6 +46,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity
         addressEditText=(EditText) findViewById(R.id.shipment_address);
         cityEditText=(EditText) findViewById(R.id.shipment_city);
 
+        InfoDisplay(nameEditText,phoneEditText,addressEditText);
+
         confirm_order_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -49,6 +56,34 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity
             }
         });
     }
+
+    private void InfoDisplay(final EditText nameEditText, final EditText phoneEditText, final EditText addressEditText) {
+        DatabaseReference UsersRef= FirebaseDatabase.getInstance().getReference().child("Customers").child(Prevalent.currentOnlineUser.getEmail());
+        UsersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                if(snapshot.exists())
+                {
+                    String name=snapshot.child("name").getValue().toString();
+                    String phone=snapshot.child("phone").getValue().toString();
+                    nameEditText.setText(name);
+                    phoneEditText.setText(phone);
+                    if (snapshot.child("address").exists()) {
+                        String address = snapshot.child("address").getValue().toString();
+                        addressEditText.setText(address);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void Check()
     {   if(TextUtils.isEmpty(nameEditText.getText().toString()))
         {
@@ -84,7 +119,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity
 
         final DatabaseReference ordersRef= FirebaseDatabase.getInstance().getReference()
                 .child("Orders")
-                .child(Prevalent.currentOnlineUser.getPhone());
+                .child(Prevalent.currentOnlineUser.getEmail());
 
         HashMap<String,Object> ordersMap=new HashMap<>();
         ordersMap.put("totalAmount",totalAmount);
@@ -103,7 +138,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity
                 {
                     FirebaseDatabase.getInstance().getReference().child("Cart List")
                             .child("User View")
-                            .child(Prevalent.currentOnlineUser.getPhone())
+                            .child(Prevalent.currentOnlineUser.getEmail())
                             .removeValue()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

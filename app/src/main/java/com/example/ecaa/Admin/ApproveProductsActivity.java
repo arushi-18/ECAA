@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.ecaa.Model.Products;
+import com.example.ecaa.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-import Interface.ItemClickListener;
 import ViewHolder.ProductViewHolder;
 
 public class ApproveProductsActivity extends AppCompatActivity {
@@ -55,7 +55,7 @@ public class ApproveProductsActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull Products products)
             {
                 /*not sure about this model thingy.If not initialised to null, giving error, check during integration and execution for potential error*/
-                final Products model = null;
+                final Products model=products;
                 holder.txtProductName.setText(model.getP_name());
                 holder.txtProductDescription.setText(model.getDescription());
                 holder.txtProductPrice.setText("Price =Rs. "+model.getPrice());

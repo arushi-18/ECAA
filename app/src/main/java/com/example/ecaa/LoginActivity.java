@@ -8,13 +8,17 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ecaa.Admin.HomeActivityAdmin;
+import com.example.ecaa.Customer.HomeActivityCustomer;
 import com.example.ecaa.Model.Users;
 import com.example.ecaa.Prevalent.Prevalent;
+import com.example.ecaa.Seller.SellerChooseCategory;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText InputPassword,InputEmail;
     private ProgressDialog loadingBar;
     private final String ParentDB="Users";
+    private TextView ForgotPasswordLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +41,17 @@ public class LoginActivity extends AppCompatActivity {
         Button loginBtn = findViewById(R.id.login_btn);
         InputEmail=findViewById(R.id.login_email_input);
         InputPassword=findViewById(R.id.login_password_input);
+        ForgotPasswordLink=findViewById(R.id.forgot_password_link);
         loadingBar=new ProgressDialog(this);
 
+        ForgotPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this,ResetPasswordActivity.class);
+                intent.putExtra("check","login");
+                startActivity(intent);
+            }
+        });
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
@@ -93,20 +107,20 @@ public class LoginActivity extends AppCompatActivity {
                             loadingBar.dismiss();
                             if(userData.getUserType().equals("Customer"))
                             {
-                                Intent intent=new Intent(LoginActivity.this,HomeActivityCustomer.class);
+                                Intent intent=new Intent(LoginActivity.this, HomeActivityCustomer.class);
                                 Users customerData=snapshot.child("Customers").child(email).getValue(Users.class);
                                 Prevalent.currentOnlineUser= customerData;
                                 startActivity(intent);
                             }
                             else if(userData.getUserType().equals("Seller"))
                             {
-                                Intent intent=new Intent(LoginActivity.this,SellerChooseCategory.class);
+                                Intent intent=new Intent(LoginActivity.this, SellerChooseCategory.class);
                                 intent.putExtra("seller_email",email);
                                 startActivity(intent);
                             }
                             else if(userData.getUserType().equals("Admin"))
                             {
-                                Intent intent=new Intent(LoginActivity.this,HomeActivityAdmin.class);
+                                Intent intent=new Intent(LoginActivity.this, HomeActivityAdmin.class);
                                 startActivity(intent);
                             }
                         }

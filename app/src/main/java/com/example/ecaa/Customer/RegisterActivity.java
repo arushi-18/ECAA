@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Customer;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ecaa.LoginActivity;
+import com.example.ecaa.MainActivity;
+import com.example.ecaa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -124,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         {
                                             Toast.makeText(RegisterActivity.this,"Your account has been created!",Toast.LENGTH_SHORT).show();
                                             loadingBar.dismiss();
-                                            Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                                            Intent intent=new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                         }
                                         else
@@ -148,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this,"Account already exists!",Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                     Toast.makeText(RegisterActivity.this,"Please Try again with different email!",Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
+                    Intent intent=new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
             }

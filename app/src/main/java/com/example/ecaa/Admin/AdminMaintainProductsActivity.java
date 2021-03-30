@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ecaa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -71,7 +72,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task)
                 {
-                    Intent intent=new Intent (AdminMaintainProductsActivity.this,HomeActivityAdmin.class);
+                    Intent intent=new Intent (AdminMaintainProductsActivity.this, HomeActivityAdmin.class);
                     startActivity(intent);
                     finish();
                     Toast.makeText(AdminMaintainProductsActivity.this,"Product Is Deleted Successfully",Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ecaa.R;
 
 public class AccessoriesCategoryExtension extends AppCompatActivity {
     private  ImageView hat,sunglass,watch;
@@ -26,7 +28,7 @@ public class AccessoriesCategoryExtension extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(AccessoriesCategoryExtension.this,AdminAddNewProductActivity.class);
+                Intent i = new Intent(AccessoriesCategoryExtension.this, AdminAddNewProductActivity.class);
                 i.putExtra("SubCategory","hat");
                 i.putExtra("category",CategoryName);
                 startActivity(i);

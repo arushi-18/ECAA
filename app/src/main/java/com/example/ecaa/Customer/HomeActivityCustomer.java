@@ -1,7 +1,6 @@
-package com.example.ecaa;
+package com.example.ecaa.Customer;
 
 import android.content.Intent;
-import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -10,12 +9,15 @@ import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.ecaa.Admin.AdminMaintainProductsActivity;
+import com.example.ecaa.MainActivity;
 import com.example.ecaa.Model.Products;
 import com.example.ecaa.Prevalent.Prevalent;
+import com.example.ecaa.R;
+import com.example.ecaa.settingsActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -81,9 +83,10 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         CircleImageView profileImageView=headerView.findViewById(R.id.user_profile_image);
 
         if (!type.equals("Admin"))
-        {
-            userNameTextView.setText(Prevalent.currentOnlineUser.getEmail());
-
+        {   String mail=Prevalent.currentOnlineUser.getEmail();
+            mail=mail.replaceAll("\\,",".");
+            userNameTextView.setText(mail);
+            Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
         }
 
         recyclerView=findViewById(R.id.recycler_menu);
@@ -173,13 +176,13 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         }
         else if(id==R.id.nav_settings)
         {
-            Intent intent=new Intent(HomeActivityCustomer.this, SettingsActivity.class);
+            Intent intent=new Intent(HomeActivityCustomer.this, settingsActivity.class);
             startActivity(intent);
         }
         else if(id==R.id.nav_logout)
         {
             Paper.book().destroy();
-            Intent intent=new Intent (HomeActivityCustomer.this,MainActivity.class);
+            Intent intent=new Intent (HomeActivityCustomer.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

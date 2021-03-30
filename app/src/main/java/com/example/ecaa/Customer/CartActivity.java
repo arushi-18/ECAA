@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Customer;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ecaa.Model.Cart;
 import com.example.ecaa.Prevalent.Prevalent;
 //import com.example.ecaa.ViewHolder.cart_view_holder;
+import com.example.ecaa.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -60,7 +61,7 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 txtTotalAmount.setText("Total Price= Rs."+String.valueOf(TotalPrice));
-                Intent intent=new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+                Intent intent=new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price",String.valueOf(TotalPrice));
                 startActivity(intent);
                 finish();
@@ -80,18 +81,23 @@ public class CartActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<Cart> options=
                 new FirebaseRecyclerOptions.Builder<Cart>()
                 .setQuery(cartListRef.child("User View")
-                .child(Prevalent.currentOnlineUser.getPhone()).child("Products"), Cart.class).build();
-        FirebaseRecyclerAdapter<Cart, cart_view_holder> adapter
-                =new FirebaseRecyclerAdapter<Cart, cart_view_holder>(options) {
+                .child(Prevalent.currentOnlineUser.getEmail()).child("Products"), Cart.class).build();
+        FirebaseRecyclerAdapter<Cart,cart_view_holder> adapter=new FirebaseRecyclerAdapter<Cart, cart_view_holder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull cart_view_holder holder, int position, @NonNull final Cart model)
-            {
-                holder.txtProductQuantity.setText("Quantity="+model.getQuantity());
-                holder.txtProductPrice.setText("Price="+model.getPrice());
-                holder.txtProductName.setText(model.getP_name());
+            protected void onBindViewHolder(@NonNull cart_view_holder holder, int position, @NonNull Cart model) {
+                final Cart cartModel=model;
+                holder.txtProductQuantity.setText("Quantity="+cartModel.getQty());
+                holder.txtProductPrice.setText("Price="+cartModel.getPrice());
+                holder.txtProductName.setText(cartModel.getP_name());
 
-                int oneTypeProductTPrice=((Integer.valueOf(model.getPrice())))*Integer.valueOf(model.getQuantity());
+                int oneTypeProductTPrice=0;
+
+                if (cartModel.getPrice() != null && cartModel.getQty() != null && !(cartModel.getPrice().equalsIgnoreCase("null")) && !(cartModel.getQty().equalsIgnoreCase("null")) && !cartModel.getPrice().isEmpty() && !cartModel.getQty().isEmpty()) {
+                    oneTypeProductTPrice=((Integer.parseInt(cartModel.getPrice())))*Integer.parseInt(cartModel.getQty());
+                    Toast.makeText(CartActivity.this,"Item!",Toast.LENGTH_SHORT).show();
+                }
                 TotalPrice=TotalPrice+oneTypeProductTPrice;
+                txtTotalAmount.setText("Total Price= Rs."+String.valueOf(TotalPrice));
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -111,8 +117,8 @@ public class CartActivity extends AppCompatActivity {
                                 if(which==0)
                                 {
                                     Intent intent;
-                                    intent = new Intent(CartActivity.this,ProductDetailsActivity.class);
-                                    intent.putExtra("p_id",model.getPid());
+                                    intent = new Intent(CartActivity.this, ProductDetailsActivity.class);
+                                    intent.putExtra("p_id",cartModel.getPid());
                                     startActivity(intent);
                                 }
                                 if(which==1)
@@ -120,7 +126,7 @@ public class CartActivity extends AppCompatActivity {
                                     cartListRef.child("User View")
                                             .child(Prevalent.currentOnlineUser.getPhone())
                                             .child("Products")
-                                            .child(model.getPid())
+                                            .child(cartModel.getPid())
                                             .removeValue()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
@@ -150,13 +156,13 @@ public class CartActivity extends AppCompatActivity {
 
             @NonNull
             @Override
-            public cart_view_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-            {
-               View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout,parent,false);
-               cart_view_holder holder=new ViewHolder.cart_view_holder(view);
-               return holder;
+            public cart_view_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout,parent,false);
+                cart_view_holder holder=new ViewHolder.cart_view_holder(view);
+                return holder;
             }
         };
+
 
         recyclerView.setAdapter(adapter);
         adapter.startListening();
@@ -166,7 +172,7 @@ public class CartActivity extends AppCompatActivity {
     private void CheckOrderStatus()
     {
         DatabaseReference ordersRef;
-        ordersRef=FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
+        ordersRef=FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getEmail());
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)

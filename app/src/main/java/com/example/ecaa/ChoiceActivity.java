@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.ecaa.Customer.RegisterActivity;
+import com.example.ecaa.Seller.seller_register;
+
 public class ChoiceActivity extends AppCompatActivity {
     private Button customerBtn,sellerBtn;
     @Override
@@ -20,7 +23,7 @@ public class ChoiceActivity extends AppCompatActivity {
         customerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent=new Intent(ChoiceActivity.this,RegisterActivity.class);
+                Intent intent=new Intent(ChoiceActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -28,7 +31,7 @@ public class ChoiceActivity extends AppCompatActivity {
         sellerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent=new Intent(ChoiceActivity.this,seller_register.class);
+                Intent intent=new Intent(ChoiceActivity.this, seller_register.class);
                 startActivity(intent);
             }
         });

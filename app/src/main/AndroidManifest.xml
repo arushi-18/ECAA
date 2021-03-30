@@ -15,8 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SearchActivity"></activity>
-        <activity android:name=".AdminNewOrdersActivity" />
-        <activity android:name=".HomeActivityAdmin" />
+        <activity android:name=".Admin.AdminNewOrdersActivity" />
+        <activity android:name=".Admin.HomeActivityAdmin" />
         <activity android:name=".ChoiceActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -25,28 +25,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".Customer.RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".seller_register" />
-        <activity android:name=".AdminAddNewProductActivity" />
-        <activity android:name=".AdminCategoryActivity" />
-        <activity android:name=".AccessoriesCategoryExtension" />
-        <activity android:name=".ClothingCategoryExtension" />
-        <activity android:name=".ElectronicsCategoryExtension" />
-        <activity android:name=".SellerAccessoriesCategoryExtension" />
-        <activity android:name=".SellerChooseCategory" />
-        <activity android:name=".SellerAddProductDetails" />
-        <activity android:name=".SellerClothingCategoryExtension" />
-        <activity android:name=".SellerElectronicsCategoryExtension" />
-        <activity android:name=".HomeActivityCustomer" />
-        <activity android:name=".AdminMaintainProductsActivity" />
-        <activity android:name=".CartActivity"/>
-        <activity android:name=".SettingsActivity"/>
-        <activity android:name=".ConfirmFinalOrderActivity"/>
-        <activity android:name=".ProductDetailsActivity"/>
-        <activity android:name=".ApproveProductsActivity"/>
-
-
+        <activity android:name=".Seller.seller_register" />
+        <activity android:name=".Admin.AdminAddNewProductActivity" />
+        <activity android:name=".Admin.AdminCategoryActivity" />
+        <activity android:name=".Admin.AccessoriesCategoryExtension" />
+        <activity android:name=".Admin.ClothingCategoryExtension" />
+        <activity android:name=".Admin.ElectronicsCategoryExtension" />
+        <activity android:name=".Seller.SellerAccessoriesCategoryExtension" />
+        <activity android:name=".Seller.SellerChooseCategory" />
+        <activity android:name=".Seller.SellerAddProductDetails" />
+        <activity android:name=".Seller.SellerClothingCategoryExtension" />
+        <activity android:name=".Seller.SellerElectronicsCategoryExtension" />
+        <activity android:name=".Customer.HomeActivityCustomer" />
+        <activity android:name=".Admin.AdminMaintainProductsActivity" />
+        <activity android:name=".Customer.CartActivity"/>
+        <activity android:name=".Customer.ConfirmFinalOrderActivity"/>
+        <activity android:name=".Customer.ProductDetailsActivity"/>
+        <activity android:name=".Admin.ApproveProductsActivity"/>
+        <activity android:name=".settingsActivity"/>
+        <activity android:name=".ResetPasswordActivity"/>
 
     </application>
 

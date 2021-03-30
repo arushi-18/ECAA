@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Customer;
 
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
@@ -15,11 +15,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+
 import com.example.ecaa.Model.Products;
 import com.example.ecaa.Prevalent.Prevalent;
+import com.example.ecaa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -100,14 +101,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("price",productPrice.getText().toString());
         cartMap.put("date",saveCurrentDate);
         cartMap.put("time",saveCurrentTime);
-        cartMap.put("qty",numberButton.getNumber());
-        cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone()).child("Products")
+        cartMap.put("qty", numberButton.getNumber());
+        cartListRef.child("User View").child(Prevalent.currentOnlineUser.getEmail()).child("Products")
                 .child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task)
                     {
                         if(task.isSuccessful())
-                        {    cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone()).child("Products")
+                        {    cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getEmail()).child("Products")
                                 .child(productID).updateChildren(cartMap)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -141,15 +142,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 {
                     if(snapshot.exists())
                     {
-                       String shippingStatus= snapshot.child("status").getValue().toString();
-                       if (shippingStatus.equals("shipped"))
-                       {
-                           state="order shipped";
-                       }
-                       else if (shippingStatus.equals("not shipped"))
-                       {
-                           state="order placed";
-                       }
+                       Products products=snapshot.getValue(Products.class);
+                       productName.setText(products.getP_name());
+                       productDescription.setText(products.getDescription());
+                       productPrice.setText(products.getPrice());
+                       Picasso.get().load(products.getImage()).into(productImage);
+
                     }
                 }
 

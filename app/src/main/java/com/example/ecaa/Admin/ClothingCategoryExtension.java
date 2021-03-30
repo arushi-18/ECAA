@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ecaa.R;
 
 public class ClothingCategoryExtension extends AppCompatActivity
 {
@@ -28,7 +30,7 @@ public class ClothingCategoryExtension extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(ClothingCategoryExtension.this,AdminAddNewProductActivity.class);
+                Intent i = new Intent(ClothingCategoryExtension.this, AdminAddNewProductActivity.class);
                 i.putExtra("SubCategory","Men");
                 i.putExtra("category",CategoryName);
                 startActivity(i);

@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Seller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ecaa.LoginActivity;
+import com.example.ecaa.MainActivity;
+import com.example.ecaa.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -128,7 +131,7 @@ public class seller_register extends AppCompatActivity {
                                     {
                                         Toast.makeText(seller_register.this,"Your account has been created!",Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
-                                        Intent intent=new Intent(seller_register.this,LoginActivity.class);
+                                        Intent intent=new Intent(seller_register.this, LoginActivity.class);
                                         startActivity(intent);
                                     }
                                     else
@@ -152,7 +155,7 @@ public class seller_register extends AppCompatActivity {
                     Toast.makeText(seller_register.this,"Account already exists!",Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                     Toast.makeText(seller_register.this,"Please Try again with different email!",Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(seller_register.this,MainActivity.class);
+                    Intent intent=new Intent(seller_register.this, MainActivity.class);
                     startActivity(intent);
                 }
             }

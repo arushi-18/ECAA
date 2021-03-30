@@ -11,7 +11,10 @@ public class Users {
         this.email = email;
         this.password = password;
         this.userType = userType;
-        /* this.userName=Name;*/
+        this.name=name;
+        this.phone=phone;
+        this.address=address;
+        this.image=image;
     }
 
     public String getEmail() {

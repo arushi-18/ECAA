@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Seller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ecaa.R;
 
 public class SellerChooseCategory extends AppCompatActivity
 {
@@ -78,7 +80,7 @@ public class SellerChooseCategory extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerChooseCategory.this,SellerAddProductDetails.class);
+                Intent i = new Intent(SellerChooseCategory.this, SellerAddProductDetails.class);
                 i.putExtra("Category","Footwear");
                 i.putExtra("seller_email",email);
                 startActivity(i);

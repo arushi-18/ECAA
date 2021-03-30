@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductDetailsActivity">
+    tools:context=".Customer.ProductDetailsActivity">
 
     <ImageView
         android:id="@+id/product_image_details"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/product_price_details"
-        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:background="#CD1A1A"
@@ -64,7 +64,7 @@
         app:finalNumber="10"
         app:initialNumber="1"
         app:textColor="@color/colorPrimaryDark"
-        app:textSize="16dp"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+        app:textSize="16dp" />
 <!--ERROR ERROR ERROR -->
     <Button
         android:id="@+id/add_product_to_cart_btn"
@@ -74,7 +74,7 @@
         android:layout_margin="25dp"
         android:background="@color/colorPrimaryDark"
         android:text="Add to Cart"
-        android:textColor="white"
+        android:textColor="@color/colorPrimary"
         android:textSize="18dp">
 
     </Button>

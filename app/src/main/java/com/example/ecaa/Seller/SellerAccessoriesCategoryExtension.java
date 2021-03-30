@@ -1,4 +1,4 @@
-package com.example.ecaa;
+package com.example.ecaa.Seller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,56 +7,58 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SellerClothingCategoryExtension extends AppCompatActivity
+import com.example.ecaa.R;
+
+public class SellerAccessoriesCategoryExtension extends AppCompatActivity
 {
-    private ImageView imgMen,imgWomen,imgKids;
+    private ImageView imgHat,imgSunglasses,imgWatch;
     private String CategoryName,email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller_clothing_category_extension);
+        setContentView(R.layout.activity_seller_accessories_category_extension);
 
-        imgMen = (ImageView) findViewById(R.id.product_men);
-        imgWomen = (ImageView) findViewById(R.id.product_women);
-        imgKids = (ImageView) findViewById(R.id.product_kids);
+        imgHat = (ImageView) findViewById(R.id.product_hat);
+        imgSunglasses = (ImageView) findViewById(R.id.product_sunglasses);
+        imgWatch = (ImageView) findViewById(R.id.product_watch);
         CategoryName=getIntent().getExtras().get("Category").toString();
         email=getIntent().getExtras().get("seller_email").toString();
 
-        imgMen.setOnClickListener(new View.OnClickListener()
+        imgHat.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerClothingCategoryExtension.this,SellerAddProductDetails.class);
-                i.putExtra("SubCategory","Men");
+                Intent i = new Intent(SellerAccessoriesCategoryExtension.this, SellerAddProductDetails.class);
+                i.putExtra("SubCategory","Hat");
                 i.putExtra("Category",CategoryName);
                 i.putExtra("seller_email",email);
                 startActivity(i);
             }
         });
 
-        imgWomen.setOnClickListener(new View.OnClickListener()
+        imgSunglasses.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerClothingCategoryExtension.this,SellerAddProductDetails.class);
-                i.putExtra("SubCategory","Women");
+                Intent i = new Intent(SellerAccessoriesCategoryExtension.this,SellerAddProductDetails.class);
+                i.putExtra("SubCategory","Sunglasses");
                 i.putExtra("Category",CategoryName);
                 i.putExtra("seller_email",email);
                 startActivity(i);
             }
         });
 
-        imgKids.setOnClickListener(new View.OnClickListener()
+        imgWatch.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(SellerClothingCategoryExtension.this,SellerAddProductDetails.class);
-                i.putExtra("SubCategory","Kids");
+                Intent i = new Intent(SellerAccessoriesCategoryExtension.this,SellerAddProductDetails.class);
+                i.putExtra("SubCategory","Watch");
                 i.putExtra("Category",CategoryName);
                 i.putExtra("seller_email",email);
                 startActivity(i);
