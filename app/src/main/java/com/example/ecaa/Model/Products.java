@@ -2,14 +2,14 @@ package com.example.ecaa.Model;
 
 public class Products
 {
-    private String p_name,description,price,image,category,p_id,qty;
+    private String p_name,description,price,image,category,p_id,qty,status;
 
     public Products()
     {
 
     }
 
-    public Products(String p_name, String description, String price, String image, String category, String p_id, String qty) {
+    public Products(String p_name, String description, String price, String image, String category, String p_id, String qty,String status) {
 
         this.p_name = p_name;
         this.description = description;
@@ -18,6 +18,7 @@ public class Products
         this.category = category;
         this.p_id = p_id;
         this.qty = qty;
+        this.status=status;
     }
 
     public String getP_name() {
@@ -76,4 +77,11 @@ public class Products
         this.qty = qty;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

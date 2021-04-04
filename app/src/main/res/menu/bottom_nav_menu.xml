@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/app_name" />
+
+    <item
+        android:id="@+id/navigation_upload"
+        android:enabled="true"
+        android:icon="@drawable/upload"
+        android:title="Upload Product"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/navigation_logout"
+        android:enabled="true"
+        android:icon="@drawable/logout"
+        android:title="Logout" />
+
+</menu>

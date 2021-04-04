@@ -2,23 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.ecaa">
+    package="com.example.ecaa" >
 
     <dist:module dist:instant="true" />
 
     <application
-        tools:replace="android:icon"
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".SearchActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon" >
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main2" >
+        </activity>
+        <activity android:name=".SearchActivity" />
         <activity android:name=".Admin.AdminNewOrdersActivity" />
         <activity android:name=".Admin.HomeActivityAdmin" />
         <activity android:name=".ChoiceActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,13 +44,13 @@
         <activity android:name=".Seller.SellerElectronicsCategoryExtension" />
         <activity android:name=".Customer.HomeActivityCustomer" />
         <activity android:name=".Admin.AdminMaintainProductsActivity" />
-        <activity android:name=".Customer.CartActivity"/>
-        <activity android:name=".Customer.ConfirmFinalOrderActivity"/>
-        <activity android:name=".Customer.ProductDetailsActivity"/>
-        <activity android:name=".Admin.ApproveProductsActivity"/>
-        <activity android:name=".settingsActivity"/>
-        <activity android:name=".ResetPasswordActivity"/>
-
+        <activity android:name=".Customer.CartActivity" />
+        <activity android:name=".Customer.ConfirmFinalOrderActivity" />
+        <activity android:name=".Customer.ProductDetailsActivity" />
+        <activity android:name=".Admin.ApproveProductsActivity" />
+        <activity android:name=".settingsActivity" />
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".Seller.SellerHomePage" />
     </application>
 
 </manifest>

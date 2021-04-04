@@ -19,6 +19,7 @@ import com.example.ecaa.Customer.HomeActivityCustomer;
 import com.example.ecaa.Model.Users;
 import com.example.ecaa.Prevalent.Prevalent;
 import com.example.ecaa.Seller.SellerChooseCategory;
+import com.example.ecaa.Seller.SellerHomePage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -114,8 +115,10 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else if(userData.getUserType().equals("Seller"))
                             {
-                                Intent intent=new Intent(LoginActivity.this, SellerChooseCategory.class);
-                                intent.putExtra("seller_email",email);
+                                Intent intent=new Intent(LoginActivity.this, SellerHomePage.class);
+                                Users sellerData=snapshot.child("Sellers").child(email).getValue(Users.class);
+                                Prevalent.currentOnlineUser= sellerData;
+                                //intent.putExtra("seller_email",email);
                                 startActivity(intent);
                             }
                             else if(userData.getUserType().equals("Admin"))

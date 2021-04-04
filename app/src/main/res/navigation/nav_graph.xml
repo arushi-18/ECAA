@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.ecaa.ui.home.HomeFragment"
+        android:label="home_fragment_label"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_DashboardFragment"
+            app:destination="@id/navigation_upload" />
+        <action
+            android:id="@+id/action_HomeFragment_to_NotificationsFragment"
+            app:destination="@id/navigation_logout" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_upload"
+        android:name="com.example.ecaa.ui.dashboard.DashboardFragment"
+        android:label="dashboard_fragment_label"
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_DashboardFragment_to_HomeFragment"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_NotificationsFragment"
+            app:destination="@id/navigation_logout" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_logout"
+        android:name="com.example.ecaa.ui.notifications.NotificationsFragment"
+        android:label="notifications_fragment_label"
+        tools:layout="@layout/fragment_notifications">
+
+        <action
+            android:id="@+id/action_NotificationsFragment_to_HomeFragment"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_NotificationsFragment_to_DashboardFragment"
+            app:destination="@id/navigation_upload" />
+    </fragment>
+</navigation>
