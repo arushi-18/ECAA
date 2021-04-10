@@ -44,6 +44,7 @@
         <activity android:name=".Seller.SellerElectronicsCategoryExtension" />
         <activity android:name=".Customer.HomeActivityCustomer" />
         <activity android:name=".Admin.AdminMaintainProductsActivity" />
+        <activity android:name=".Admin.AdminUserProductsActivity" />
         <activity android:name=".Customer.CartActivity" />
         <activity android:name=".Customer.ConfirmFinalOrderActivity" />
         <activity android:name=".Customer.ProductDetailsActivity" />

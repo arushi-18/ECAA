@@ -115,13 +115,14 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity
         saveCurrentDate=currentDate.format(calForDate.getTime());
 
         SimpleDateFormat currentTime=new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime=currentDate.format(calForDate.getTime());
+        saveCurrentTime=currentTime.format(calForDate.getTime());
 
         final DatabaseReference ordersRef= FirebaseDatabase.getInstance().getReference()
                 .child("Orders")
                 .child(Prevalent.currentOnlineUser.getEmail());
 
         HashMap<String,Object> ordersMap=new HashMap<>();
+        ordersMap.put("email",Prevalent.currentOnlineUser.getEmail());
         ordersMap.put("totalAmount",totalAmount);
         ordersMap.put("name",nameEditText.getText().toString());
         ordersMap.put("phone",phoneEditText.getText().toString());

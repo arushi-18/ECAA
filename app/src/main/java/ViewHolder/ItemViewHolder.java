@@ -21,7 +21,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         imageView = (ImageView) itemView.findViewById(R.id.product_image);
         txtProductName = (TextView) itemView.findViewById(R.id.product_name);
-        txtProductDescription = (TextView) itemView.findViewById(R.id.product_description);
+        //txtProductDescription = (TextView) itemView.findViewById(R.id.product_description);
         txtProductPrice = (TextView) itemView.findViewById(R.id.product_price);
         txtProductStatus = (TextView) itemView.findViewById(R.id.product_status);
     }

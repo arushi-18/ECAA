@@ -160,13 +160,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private void CheckOrderState()
     {
         DatabaseReference ordersRef;
-        ordersRef=FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
+        ordersRef=FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getEmail());
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {   if(snapshot.exists()){
 
-                String shippingState=snapshot.child("state").getValue().toString();
+                String shippingState=snapshot.child("status").getValue().toString();
                 if(shippingState.equals("Shipped"))
                 {
                     state="Order Shipped";

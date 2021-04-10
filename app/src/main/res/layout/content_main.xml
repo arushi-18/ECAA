@@ -12,8 +12,7 @@
         android:id="@+id/recycler_menu"
         android:layout_width="411dp"
         android:layout_height="601dp"
-        android:scrollbars="vertical"
-        tools:layout_editor_absoluteY="58dp">
+        android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

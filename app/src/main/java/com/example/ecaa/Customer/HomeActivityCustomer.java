@@ -14,6 +14,7 @@ import com.example.ecaa.MainActivity;
 import com.example.ecaa.Model.Products;
 import com.example.ecaa.Prevalent.Prevalent;
 import com.example.ecaa.R;
+import com.example.ecaa.SearchActivity;
 import com.example.ecaa.settingsActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -101,7 +102,7 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         super.onStart();
         FirebaseRecyclerOptions<Products> options=
                 new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(ProductsRef,Products.class)
+                .setQuery(ProductsRef.orderByChild("status").equalTo("approved"),Products.class)
                 .build();
         FirebaseRecyclerAdapter<Products, ProductViewHolder>adapter=
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
@@ -109,30 +110,25 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull final Products model)
                     {
                         holder.txtProductName.setText(model.getP_name());
-                        holder.txtProductDescription.setText(model.getDescription());
-                        holder.txtProductPrice.setText("Price =Rs. "+model.getPrice());
-                        Picasso.get().load(model.getImage()).into(holder.imageView);
+                            //holder.txtProductDescription.setText(model.getDescription());
+                            holder.txtProductPrice.setText(model.getPrice());
+                            Picasso.get().load(model.getImage()).into(holder.imageView);
 
 
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                Intent intent;
-                                if (type.equals("Admin") )
-                                {
-                                    intent = new Intent(HomeActivityCustomer.this, AdminMaintainProductsActivity.class);
+                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent;
+                                    if (type.equals("Admin")) {
+                                        intent = new Intent(HomeActivityCustomer.this, AdminMaintainProductsActivity.class);
 
+                                    } else {
+                                        intent = new Intent(HomeActivityCustomer.this, ProductDetailsActivity.class);
+                                    }
+                                    intent.putExtra("p_id", model.getP_id());
+                                    startActivity(intent);
                                 }
-                                else
-                                {
-                                    intent = new Intent(HomeActivityCustomer.this, ProductDetailsActivity.class);
-                                }
-                                intent.putExtra("p_id", model.getP_id());
-                                startActivity(intent);
-
-                            }
-                        });
+                            });
 
                     }
 
@@ -170,9 +166,10 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         {
 
         }
-        else if(id==R.id.nav_orders)
+        else if(id==R.id.nav_search)
         {
-
+            Intent intent=new Intent(HomeActivityCustomer.this, SearchActivity.class);
+            startActivity(intent);
         }
         else if(id==R.id.nav_settings)
         {

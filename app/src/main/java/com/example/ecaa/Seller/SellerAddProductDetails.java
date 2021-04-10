@@ -208,7 +208,7 @@ public class SellerAddProductDetails extends AppCompatActivity
         productMap.put("image",downloadImageUrl);
         productMap.put("category",categoryName);
         productMap.put("price",price);
-        productMap.put("pname",productName);
+        productMap.put("p_name",productName);
         productMap.put("qty",qty);
         if(SubCategoryName!=null)
             productMap.put("sub_category",SubCategoryName);
