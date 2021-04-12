@@ -14,10 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon" >
-        <activity
-            android:name=".MainActivity2"
-            android:label="@string/title_activity_main2" >
-        </activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".Admin.AdminNewOrdersActivity" />
         <activity android:name=".Admin.HomeActivityAdmin" />

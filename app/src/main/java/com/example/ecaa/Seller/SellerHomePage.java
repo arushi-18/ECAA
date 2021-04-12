@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -43,16 +44,25 @@ public class SellerHomePage extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference unverifiedProductsRef;
 
-    //private final
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_home_page);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
         message=findViewById(R.id.message);
+
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_upload, R.id.navigation_logout)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
+
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
         {
             @Override
@@ -67,7 +77,6 @@ public class SellerHomePage extends AppCompatActivity
                     }
 
                     case R.id.navigation_upload: {
-                        Toast.makeText(SellerHomePage.this, "Upload", Toast.LENGTH_SHORT).show();
                         Intent intentCat = new Intent(SellerHomePage.this, SellerChooseCategory.class);
                         intentCat.putExtra("seller_email", Prevalent.currentOnlineUser.getEmail());
                         startActivity(intentCat);
@@ -88,16 +97,6 @@ public class SellerHomePage extends AppCompatActivity
                 return false;
             }
         });
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_upload, R.id.navigation_logout)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
-
-        //BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
 
         unverifiedProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         recyclerView = findViewById(R.id.seller_home_products);
@@ -118,20 +117,13 @@ public class SellerHomePage extends AppCompatActivity
         //FirebaseAuth.getInstance().getCurrentUser().getUid()
         FirebaseRecyclerAdapter<Products, ItemViewHolder> adapter = new FirebaseRecyclerAdapter<Products,ItemViewHolder>(options)
         {
-            @NonNull
-            @Override
-            public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-            {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.seller_item_view,parent,false);
-                ItemViewHolder holder = new ItemViewHolder(view);
-                return holder;
-            }
+
 
             @Override
             protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, final Products model)
             {
                 holder.txtProductName.setText(model.getP_name());
-                holder.txtProductDescription.setText(model.getDescription());
+                //holder.txtProductDescription.setText(model.getDescription());
                 holder.txtProductPrice.setText("Price: " + model.getPrice());
                 holder.txtProductStatus.setText("Status: "+model.getStatus());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
@@ -162,6 +154,15 @@ public class SellerHomePage extends AppCompatActivity
                         builder.show();
                     }
                 });
+            }
+
+            @NonNull
+            @Override
+            public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+            {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.seller_item_view,parent,false);
+                ItemViewHolder holder = new ItemViewHolder(view);
+                return holder;
             }
         };
 
