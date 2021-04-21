@@ -127,11 +127,13 @@ public class SellerHomePage extends AppCompatActivity
                 holder.txtProductPrice.setText("Price: " + model.getPrice());
                 holder.txtProductStatus.setText("Status: "+model.getStatus());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
+                final String productID = model.getP_id();
                 holder.itemView.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View v) {
-                        final String productID = model.getP_id();
+
+                        Toast.makeText(SellerHomePage.this, productID, Toast.LENGTH_SHORT).show();
 
                         final CharSequence[] options = new CharSequence[]
                                 {
@@ -181,6 +183,7 @@ public class SellerHomePage extends AppCompatActivity
                     public void onComplete(@NonNull Task<Void> task)
                     {
                         Toast.makeText(SellerHomePage.this,"That item has been deleted successfully",Toast.LENGTH_SHORT).show();
+
                     }
                 });
     }

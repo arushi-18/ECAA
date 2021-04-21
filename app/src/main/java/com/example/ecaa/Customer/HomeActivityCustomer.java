@@ -68,8 +68,10 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivityCustomer.this, CartActivity.class );
-                startActivity(intent);
+                if(!type.equals("Admin")) {
+                    Intent intent = new Intent(HomeActivityCustomer.this, CartActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -102,33 +104,33 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         super.onStart();
         FirebaseRecyclerOptions<Products> options=
                 new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(ProductsRef.orderByChild("status").equalTo("approved"),Products.class)
-                .build();
+                        .setQuery(ProductsRef.orderByChild("status").equalTo("approved"),Products.class)
+                        .build();
         FirebaseRecyclerAdapter<Products, ProductViewHolder>adapter=
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull final Products model)
                     {
                         holder.txtProductName.setText(model.getP_name());
-                            //holder.txtProductDescription.setText(model.getDescription());
-                            holder.txtProductPrice.setText(model.getPrice());
-                            Picasso.get().load(model.getImage()).into(holder.imageView);
+                        //holder.txtProductDescription.setText(model.getDescription());
+                        holder.txtProductPrice.setText(model.getPrice());
+                        Picasso.get().load(model.getImage()).into(holder.imageView);
 
 
-                            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent;
-                                    if (type.equals("Admin")) {
-                                        intent = new Intent(HomeActivityCustomer.this, AdminMaintainProductsActivity.class);
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent;
+                                if (type.equals("Admin")) {
+                                    intent = new Intent(HomeActivityCustomer.this, AdminMaintainProductsActivity.class);
 
-                                    } else {
-                                        intent = new Intent(HomeActivityCustomer.this, ProductDetailsActivity.class);
-                                    }
-                                    intent.putExtra("p_id", model.getP_id());
-                                    startActivity(intent);
+                                } else {
+                                    intent = new Intent(HomeActivityCustomer.this, ProductDetailsActivity.class);
                                 }
-                            });
+                                intent.putExtra("p_id", model.getP_id());
+                                startActivity(intent);
+                            }
+                        });
 
                     }
 
@@ -158,8 +160,10 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id=item.getItemId();
         if(id==R.id.nav_cart){
-            Intent intent=new Intent(HomeActivityCustomer.this,CartActivity.class );
-            startActivity(intent);
+            if(!type.equals("Admin")) {
+                Intent intent = new Intent(HomeActivityCustomer.this, CartActivity.class);
+                startActivity(intent);
+            }
 
         }
         else if(id==R.id.nav_categories)
@@ -168,21 +172,27 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         }
         else if(id==R.id.nav_search)
         {
-            Intent intent=new Intent(HomeActivityCustomer.this, SearchActivity.class);
-            startActivity(intent);
+            if(!type.equals("Admin")) {
+                Intent intent = new Intent(HomeActivityCustomer.this, SearchActivity.class);
+                startActivity(intent);
+            }
         }
         else if(id==R.id.nav_settings)
         {
-            Intent intent=new Intent(HomeActivityCustomer.this, settingsActivity.class);
-            startActivity(intent);
+            if (!type.equals("Admin")) {
+                Intent intent = new Intent(HomeActivityCustomer.this, settingsActivity.class);
+                startActivity(intent);
+            }
         }
         else if(id==R.id.nav_logout)
         {
-            Paper.book().destroy();
-            Intent intent=new Intent (HomeActivityCustomer.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            if(!type.equals("Admin")) {
+                Paper.book().destroy();
+                Intent intent = new Intent(HomeActivityCustomer.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
         }
         return false;
     }
