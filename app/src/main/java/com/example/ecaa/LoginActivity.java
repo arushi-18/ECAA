@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,11 +29,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 
+import io.paperdb.Paper;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText InputPassword,InputEmail;
     private ProgressDialog loadingBar;
     private final String ParentDB="Users";
     private TextView ForgotPasswordLink;
+    private CheckBox RememberMeCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         InputPassword=findViewById(R.id.login_password_input);
         ForgotPasswordLink=findViewById(R.id.forgot_password_link);
         loadingBar=new ProgressDialog(this);
+        RememberMeCheckBox=(CheckBox)findViewById(R.id.remember_me_checkbox);
+
+
+        Paper.init(this);
 
         ForgotPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +98,12 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void AllowAccess(final String email, final String password)
     {
+        if(RememberMeCheckBox.isChecked())
+        {
+            Paper.book().write(Prevalent.UserEmailKey,email);
+            Paper.book().write(Prevalent.UserPasswordKey,password);
+
+        }
         final DatabaseReference RootRef;
         RootRef= FirebaseDatabase.getInstance().getReference();
 
