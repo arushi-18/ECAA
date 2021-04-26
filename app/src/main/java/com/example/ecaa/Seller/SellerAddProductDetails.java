@@ -201,7 +201,7 @@ public class SellerAddProductDetails extends AppCompatActivity
     private void SaveProductInfoToDatabase()
     {
         HashMap<String,Object> productMap = new HashMap<>();
-        productMap.put("pid",productRandomKey);
+        productMap.put("p_id",productRandomKey);
         productMap.put("seller_id",seller_email);
         productMap.put("status","unapproved");
         productMap.put("description",description);
@@ -232,19 +232,13 @@ public class SellerAddProductDetails extends AppCompatActivity
                 }
             }
         });
-
-
-
-
-
-
-
-
     }
 
+    @Override
+    public void onBackPressed(){
 
-
-
-
+        Intent intent=new Intent(SellerAddProductDetails.this, SellerChooseCategory.class);
+        startActivity(intent);
+    }
 
 }

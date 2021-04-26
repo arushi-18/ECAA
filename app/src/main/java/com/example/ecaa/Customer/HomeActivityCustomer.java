@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ecaa.Admin.AdminMaintainProductsActivity;
 import com.example.ecaa.MainActivity;
@@ -42,6 +43,7 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     private String type="";
+    private long pressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +88,7 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         CircleImageView profileImageView=headerView.findViewById(R.id.user_profile_image);
 
         if (!type.equals("Admin"))
-        {   String mail=Prevalent.currentOnlineUser.getEmail();
-            mail=mail.replaceAll("\\,",".");
+        {   final String mail=Prevalent.currentOnlineUser.getEmail().replaceAll("\\,",".");
             userNameTextView.setText(mail);
             Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
         }
@@ -181,6 +182,7 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         {
             if (!type.equals("Admin")) {
                 Intent intent = new Intent(HomeActivityCustomer.this, settingsActivity.class);
+                intent.putExtra("userType","Customers");
                 startActivity(intent);
             }
         }
@@ -197,4 +199,23 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finishAffinity();
+
+            System.exit(0);
+            /*Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+            finish();
+            /*int pid = android.os.Process.myPid();
+            android.os.Process.killProcess(pid);*/
+        } else {
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
+    }
 }

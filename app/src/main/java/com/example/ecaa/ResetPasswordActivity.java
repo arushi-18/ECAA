@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class ResetPasswordActivity extends AppCompatActivity {
-    private String check="";
+    private String check="",ParentDB;
     private TextView pagetitle,titlequestions;
     private EditText findEmail,question1,question2;
     private Button verifyButton;
@@ -57,6 +57,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         findEmail.setVisibility(View.GONE);
         if(check.equals("settings"))
         {
+            ParentDB=getIntent().getStringExtra("userType");
             pagetitle.setText("Set Questions");
             titlequestions.setText("Please set answers for the following questions");
             verifyButton.setText("Set");
@@ -99,7 +100,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         {
             DatabaseReference ref= FirebaseDatabase.getInstance()
                     .getReference()
-                    .child("Customers")
+                    .child(ParentDB)
                     .child(Prevalent.currentOnlineUser.getEmail());
             HashMap<String,Object> userdataMap=new HashMap<>();
             userdataMap.put("answer1",answer1);
@@ -113,6 +114,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     {
                         Toast.makeText(ResetPasswordActivity.this, "you have answered the security questions successfully", Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(ResetPasswordActivity.this, settingsActivity.class);
+                        intent.putExtra("userType",ParentDB);
                         startActivity(intent);
                     }
                     else
@@ -127,7 +129,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private void displayPreviousAnswers() {
         DatabaseReference ref= FirebaseDatabase.getInstance()
                 .getReference()
-                .child("Customers")
+                .child(ParentDB)
                 .child(Prevalent.currentOnlineUser.getEmail());
         ref.child("Security Questions").addValueEventListener(new ValueEventListener() {
             @Override

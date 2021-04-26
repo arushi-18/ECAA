@@ -57,8 +57,8 @@ public class ApproveProductsActivity extends AppCompatActivity {
                 /*not sure about this model thingy.If not initialised to null, giving error, check during integration and execution for potential error*/
                 final Products model=products;
                 holder.txtProductName.setText(model.getP_name());
-                holder.txtProductDescription.setText(model.getDescription());
-                holder.txtProductPrice.setText("Price =Rs. "+model.getPrice());
+                //holder.txtProductDescription.setText(model.getDescription());
+                holder.txtProductPrice.setText(model.getPrice());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

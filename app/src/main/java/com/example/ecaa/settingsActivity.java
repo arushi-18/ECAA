@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ecaa.Customer.HomeActivityCustomer;
 import com.example.ecaa.Prevalent.Prevalent;
+import com.example.ecaa.Seller.SellerHomePage;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,7 +45,7 @@ public class settingsActivity extends AppCompatActivity
     private String myUrl="";
     private StorageTask uploadTask;
     private StorageReference storageProfilePictureRef;
-    private String checker="";
+    private String checker="",ParentDB;
 
 
     @Override
@@ -63,6 +64,8 @@ public class settingsActivity extends AppCompatActivity
         closeTextBtn=(TextView)findViewById(R.id.close_settings_btn);
         securityQuestionBtn=(Button) findViewById(R.id.settings_add_security);
 
+        ParentDB=getIntent().getExtras().get("userType").toString();
+
         userInfoDisplay(profileImageView,fullNameEditText,userPhoneEditText,addressEditText);
 
         securityQuestionBtn.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +73,7 @@ public class settingsActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent=new Intent(settingsActivity.this,ResetPasswordActivity.class);
                 intent.putExtra("check","settings");
+                intent.putExtra("userType",ParentDB);
                 startActivity(intent);
             }
         });
@@ -127,13 +131,16 @@ public class settingsActivity extends AppCompatActivity
     }
 
     private void updateUserInfo() {
-        DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Customers");
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child(ParentDB);
         HashMap<String,Object> userMap=new HashMap<>();
         userMap.put("name",fullNameEditText.getText().toString());
         userMap.put("phone",userPhoneEditText.getText().toString());
         userMap.put("address",addressEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getEmail()).updateChildren(userMap);
-        startActivity(new Intent(settingsActivity.this, HomeActivityCustomer.class));
+        if(ParentDB.equals("Customers"))
+            startActivity(new Intent(settingsActivity.this, HomeActivityCustomer.class));
+        else if(ParentDB.equals("Sellers"))
+            startActivity(new Intent(settingsActivity.this, SellerHomePage.class));
         Toast.makeText(settingsActivity.this,"Profile updated!",Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -186,7 +193,7 @@ public class settingsActivity extends AppCompatActivity
                     {
                         Uri downloadUrl=task.getResult();
                         myUrl=downloadUrl.toString();
-                        DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Customers");
+                        DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child(ParentDB);
                         HashMap<String,Object> userMap=new HashMap<>();
                         userMap.put("name",fullNameEditText.getText().toString());
                         userMap.put("phone",userPhoneEditText.getText().toString());
@@ -214,7 +221,7 @@ public class settingsActivity extends AppCompatActivity
 
     private void userInfoDisplay(final ImageView profileImageView, final EditText fullNameEditText, final EditText userPhoneEditText, final EditText addressEditText)
     {
-        DatabaseReference UsersRef= FirebaseDatabase.getInstance().getReference().child("Customers").child(Prevalent.currentOnlineUser.getEmail());
+        DatabaseReference UsersRef= FirebaseDatabase.getInstance().getReference().child(ParentDB).child(Prevalent.currentOnlineUser.getEmail());
         UsersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)

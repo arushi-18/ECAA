@@ -14,6 +14,13 @@
         android:visible="true" />
 
     <item
+        android:id="@+id/navigation_settings"
+        android:enabled="true"
+        android:icon="@drawable/orders"
+        android:title="Settings"
+        android:visible="true" />
+
+    <item
         android:id="@+id/navigation_logout"
         android:enabled="true"
         android:icon="@drawable/logout"

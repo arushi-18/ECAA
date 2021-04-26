@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class AdminMaintainProductsActivity extends AppCompatActivity {
 
     private Button applyChangesBtn,deleteProductBtn;
-    private EditText name,price,description;
+    private EditText name,price,description,qty;
     private ImageView imageView;
     private String productID="";
     private DatabaseReference productsRef;
@@ -44,6 +44,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
         name = findViewById(R.id.product_name_maintain);
         price = findViewById(R.id.product_price_maintain);
         description = findViewById(R.id.product_description_maintain);
+        qty=findViewById(R.id.product_qty_maintain);
         imageView = findViewById(R.id.product_image_maintain);
         deleteProductBtn=findViewById((R.id.delete_product_button));
 
@@ -85,6 +86,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
             String pName =name.getText().toString();
             String pPrice =price.getText().toString();
             String pDescription =description.getText().toString();
+            String pqty=qty.getText().toString();
 
             if(pName.equals(" "))
             {
@@ -101,6 +103,11 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                 Toast.makeText(this,"Please Mention The Product Description",Toast.LENGTH_SHORT).show();
 
             }
+            else if(pqty.equals(" "))
+            {
+                Toast.makeText(this,"Please Mention The Product Quantity",Toast.LENGTH_SHORT).show();
+
+            }
             else
             {
                 HashMap<String,Object> productMap = new HashMap<>();
@@ -108,6 +115,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                 productMap.put("description",pDescription);
                 productMap.put("price",pPrice);
                 productMap.put("p_name",pName);
+                productMap.put("qty",pqty);
 
                 productsRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -136,11 +144,13 @@ public class AdminMaintainProductsActivity extends AppCompatActivity {
                             String pName= snapshot.child("p_name").getValue().toString();
                             String pPrice= snapshot.child("price").getValue().toString();
                             String pDescription= snapshot.child("description").getValue().toString();
+                            String pQty= snapshot.child("qty").getValue().toString();
                             String pImage = snapshot.child("image").getValue().toString();
 
                             name.setText(pName);
                             price.setText(pPrice);
                             description.setText(pDescription);
+                            qty.setText(pQty);
                             Picasso.get().load(pImage).into(imageView);
                         }
 

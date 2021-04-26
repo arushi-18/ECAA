@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -19,14 +19,29 @@
             android:id="@+id/product_image_maintain"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:layout_marginTop="2dp"
             />
+
+        <TextView
+            android:id="@+id/product_name_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_image_maintain"
+            android:text="Product Name:"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="left"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            />
+
         <EditText
             android:id="@+id/product_name_maintain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/product_image_maintain"
+            android:layout_below="@id/product_name_holder"
             android:hint="Product Name"
             android:textAlignment="center"
             android:textSize="18dp"
@@ -36,25 +51,25 @@
             android:background="@drawable/inputs"
             />
 
-        <EditText
-            android:id="@+id/product_price_maintain"
+        <TextView
+            android:id="@+id/product_description_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/product_name_maintain"
-            android:hint="Product Price"
-            android:textAlignment="center"
-            android:textSize="18dp"
-            android:padding="12dp"
-            android:layout_margin="5dp"
-            android:textColor="@color/Black"
-            android:background="@drawable/inputs"
+            android:layout_below="@+id/product_name_maintain"
+            android:text="Product Description:"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="left"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
             />
 
         <EditText
             android:id="@+id/product_description_maintain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/product_price_maintain"
+            android:layout_below="@id/product_description_holder"
             android:hint="Product Description"
             android:layout_marginTop="2dp"
             android:textAlignment="center"
@@ -64,13 +79,73 @@
             android:textColor="@color/Black"
             android:background="@drawable/inputs"
             />
+
+        <TextView
+            android:id="@+id/product_price_holder"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_description_maintain"
+            android:text="@string/amount"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="left"
+            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            />
+
+        <EditText
+            android:id="@+id/product_price_maintain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/product_price_holder"
+            android:hint="Product Price"
+            android:layout_marginStart="100dp"
+            android:gravity="left"
+            android:textSize="18dp"
+            android:padding="12dp"
+            android:textColor="@color/Black"
+            android:background="@drawable/inputs"
+            />
+
+        <TextView
+            android:id="@+id/product_qty_holder"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_price_maintain"
+            android:text="Quantity: "
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="left"
+            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            />
+
+        <EditText
+            android:id="@+id/product_qty_maintain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/product_qty_holder"
+            android:hint="Product Price"
+            android:layout_marginStart="100dp"
+            android:gravity="left"
+            android:textSize="18dp"
+            android:padding="12dp"
+            android:textColor="@color/Black"
+            android:background="@drawable/inputs"
+            />
+
+
         <Button
             android:id="@+id/apply_changes_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/product_description_maintain"
+            android:layout_below="@id/product_qty_holder"
             android:text="Apply Changes"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="12dp"
             android:textAlignment="center"
             android:textSize="16dp"
             android:padding="12dp"
@@ -98,4 +173,4 @@
 
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+</ScrollView>

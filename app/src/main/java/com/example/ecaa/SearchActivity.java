@@ -23,12 +23,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import ViewHolder.ProductViewHolder;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private String SearchInput;
-    private Button SearchBtn;
+    private String SearchInput="";
     private EditText inputText;
     private RecyclerView searchList;
     RecyclerView.LayoutManager layoutManager;
@@ -41,11 +42,11 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         inputText=findViewById(R.id.search_product_name);
-        SearchBtn=findViewById(R.id.search_btn);
+        Button searchBtn = findViewById(R.id.search_btn);
         searchList=findViewById(R.id.search_list);
         searchList.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
 
-        SearchBtn.setOnClickListener(new View.OnClickListener() {
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -85,7 +86,7 @@ public class SearchActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull Products products)
             {
                 final Products model=products;
-                if(model.getStatus().equals("approved")) {
+                if("approved".equals(model.getStatus())) {
                     holder.txtProductName.setText(model.getP_name());
                     //holder.txtProductDescription.setText(model.getDescription());
                     holder.txtProductPrice.setText(model.getPrice());
@@ -104,6 +105,10 @@ public class SearchActivity extends AppCompatActivity {
                 else
                 {
                     holder.itemView.setVisibility(View.GONE);
+                    ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
+                    params.height = 0;
+                    params.width = 0;
+                    holder.itemView.setLayoutParams(params);
                     adapterFlag=1;
                 }
                 

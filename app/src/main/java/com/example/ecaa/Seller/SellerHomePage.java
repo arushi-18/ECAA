@@ -26,6 +26,9 @@ import com.example.ecaa.Model.Products;
 import com.example.ecaa.Prevalent.Prevalent;
 import com.example.ecaa.R;
 import ViewHolder.ItemViewHolder;
+import io.paperdb.Paper;
+
+import com.example.ecaa.settingsActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,6 +46,7 @@ public class SellerHomePage extends AppCompatActivity
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference unverifiedProductsRef;
+    private long pressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -83,10 +87,18 @@ public class SellerHomePage extends AppCompatActivity
                         return true;
                     }
 
+                    case R.id.navigation_settings: {
+                        Intent intent=new Intent(SellerHomePage.this, settingsActivity.class);
+                        intent.putExtra("userType","Sellers");
+                        startActivity(intent);
+                        return true;
+                    }
+
                     case R.id.navigation_logout: {
                         //final FirebaseAuth mAuth;
                         //mAuth=FirebaseAuth.getInstance();
                         //mAuth.signOut();
+                        Paper.book().destroy();
                         Intent intentMain = new Intent(SellerHomePage.this, MainActivity.class);
                         intentMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intentMain);
@@ -186,5 +198,25 @@ public class SellerHomePage extends AppCompatActivity
 
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finishAffinity();
+
+            System.exit(0);
+            /*Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+            finish();
+            /*int pid = android.os.Process.myPid();
+            android.os.Process.killProcess(pid);*/
+        } else {
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
 }

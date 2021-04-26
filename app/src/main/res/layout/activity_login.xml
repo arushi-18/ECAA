@@ -62,7 +62,7 @@
             style="@style/Material.Drawable.CheckBox"
             android:text="Remember Me"
             android:textColor="@color/colorPrimary"
-            app:cbd_strokeColor="@color/colorPrimary"
+            app:cbd_strokeColor="@color/colorPrimaryDark"
             android:gravity="center_vertical"
             android:textSize="17sp"
             android:textStyle="bold"
