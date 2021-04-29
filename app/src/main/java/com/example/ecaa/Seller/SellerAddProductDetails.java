@@ -234,11 +234,11 @@ public class SellerAddProductDetails extends AppCompatActivity
         });
     }
 
-    @Override
+    /*@Override
     public void onBackPressed(){
 
         Intent intent=new Intent(SellerAddProductDetails.this, SellerChooseCategory.class);
         startActivity(intent);
-    }
+    }*/
 
 }
