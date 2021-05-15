@@ -2,4 +2,5 @@
     <string name="app_name">Dream To Doorstep</string>
     <string name="title_activity_main2">MainActivity</string>
     <string name="amount">Price: &#x20B9;</string>
+    <string name="totalAmount">Total Price: &#x20B9;</string>
 </resources>

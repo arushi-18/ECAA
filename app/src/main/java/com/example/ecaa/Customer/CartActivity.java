@@ -3,6 +3,7 @@ package com.example.ecaa.Customer;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Button NextProcessBtn;
-    private TextView txtTotalAmount,txtMsg1;
+    private TextView txtTotalAmount,txtMsg1,priceHolder,cartText;
     private long qty;
     private int TotalPrice=0;
 
@@ -59,6 +60,8 @@ public class CartActivity extends AppCompatActivity {
 
         NextProcessBtn=(Button) findViewById(R.id.next_btn);
         txtTotalAmount=(TextView) findViewById(R.id.total_price);
+        priceHolder=(TextView) findViewById(R.id.total_price_placeholder);
+        cartText=(TextView) findViewById(R.id.cart_msg);
         txtMsg1=(TextView) findViewById(R.id.msg1);
 
 
@@ -66,7 +69,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                txtTotalAmount.setText("Total Price= Rs."+String.valueOf(TotalPrice));
+                txtTotalAmount.setText(String.valueOf(TotalPrice));
                 Intent intent=new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price",String.valueOf(TotalPrice));
                 startActivity(intent);
@@ -95,17 +98,16 @@ public class CartActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull cart_view_holder holder, int position, @NonNull final Cart model) {
                 final Cart cartModel=model;
                 holder.txtProductQuantity.setText("Quantity="+cartModel.getQty());
-                holder.txtProductPrice.setText("Price="+cartModel.getPrice());
+                holder.txtProductPrice.setText(cartModel.getPrice());
                 holder.txtProductName.setText(cartModel.getP_name());
 
                 int oneTypeProductTPrice=0;
 
                 if (cartModel.getPrice() != null && cartModel.getQty() != null && !(cartModel.getPrice().equalsIgnoreCase("null")) && !(cartModel.getQty().equalsIgnoreCase("null")) && !cartModel.getPrice().isEmpty() && !cartModel.getQty().isEmpty()) {
                     oneTypeProductTPrice=((Integer.parseInt(cartModel.getPrice())))*Integer.parseInt(cartModel.getQty());
-                    Toast.makeText(CartActivity.this,"Item!",Toast.LENGTH_SHORT).show();
                 }
                 TotalPrice=TotalPrice+oneTypeProductTPrice;
-                txtTotalAmount.setText("Total Price= Rs."+String.valueOf(TotalPrice));
+                txtTotalAmount.setText(String.valueOf(TotalPrice));
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -260,9 +262,12 @@ public class CartActivity extends AppCompatActivity {
                 }
                 else if(shippingState.equals("not shipped"))
                 {
-                    txtTotalAmount.setText("Shipping State=Not Shipped");
+                    //txtTotalAmount.setText("Shipping State=Not Shipped");
+                    txtTotalAmount.setVisibility(View.GONE);
+                    cartText.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                     txtMsg1.setVisibility(View.VISIBLE);
+                    priceHolder.setVisibility(View.GONE);
                     NextProcessBtn.setVisibility(View.GONE);
 
                     Toast.makeText(CartActivity.this,"you can purchase more products once you receive your first final order",Toast.LENGTH_SHORT).show();

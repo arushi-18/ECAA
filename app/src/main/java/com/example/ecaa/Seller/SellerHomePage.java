@@ -136,7 +136,7 @@ public class SellerHomePage extends AppCompatActivity
             {
                 holder.txtProductName.setText(model.getP_name());
                 //holder.txtProductDescription.setText(model.getDescription());
-                holder.txtProductPrice.setText("Price: " + model.getPrice());
+                holder.txtProductPrice.setText(model.getPrice());
                 holder.txtProductStatus.setText("Status: "+model.getStatus());
                 Picasso.get().load(model.getImage()).into(holder.imageView);
                 final String productID = model.getP_id();
@@ -145,7 +145,6 @@ public class SellerHomePage extends AppCompatActivity
                     @Override
                     public void onClick(View v) {
 
-                        Toast.makeText(SellerHomePage.this, productID, Toast.LENGTH_SHORT).show();
 
                         final CharSequence[] options = new CharSequence[]
                                 {

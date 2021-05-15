@@ -81,7 +81,7 @@ public class ApproveProductsActivity extends AppCompatActivity {
                                 }
                                 else if (which==1)
                                 {
-
+                                    RejectProductStatus (productID);
                                 }
 
                             }
@@ -113,6 +113,16 @@ public class ApproveProductsActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task)
             {
                 Toast.makeText(ApproveProductsActivity.this, "Item has been approved", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void RejectProductStatus(String productID)
+    {
+        unapprovedProductsRef.child(productID).child("status").setValue("product rejected").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task)
+            {
+                Toast.makeText(ApproveProductsActivity.this, "Item has been rejected", Toast.LENGTH_SHORT).show();
             }
         });
     }

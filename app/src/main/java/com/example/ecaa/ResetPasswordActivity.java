@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -210,12 +211,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                         Toast.makeText(ResetPasswordActivity.this, "Answer Two is not correct! ", Toast.LENGTH_SHORT).show();
                                     }
                                     if (ans1.equals(answer1) && ans2.equals(answer2)) {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(ResetPasswordActivity.this);
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(ResetPasswordActivity.this,R.style.AlertDialogTheme);
                                         builder.setTitle("Set New Password");
 
                                         final EditText newPassword = new EditText(ResetPasswordActivity.this);
                                         newPassword.setHint("Enter new Password");
-                                        newPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                                        newPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                                         builder.setView(newPassword);
                                         builder.setPositiveButton("Change", new DialogInterface.OnClickListener() {
                                             @Override

@@ -35,10 +35,10 @@
 
             />
         <TextView
-            android:id="@+id/order_total_price"
-            android:layout_width="match_parent"
+            android:id="@+id/order_total_price_placeholder"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Total Price"
+            android:text="@string/totalAmount"
             android:textColor="@android:color/white"
             android:textSize="14dp"
             android:textStyle="bold"
@@ -46,6 +46,20 @@
             android:gravity="center"
             android:layout_marginTop="25dp"
             />
+
+        <TextView
+            android:id="@+id/order_total_price"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/order_total_price_placeholder"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Total Price"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/order_address_city"
             android:layout_width="match_parent"

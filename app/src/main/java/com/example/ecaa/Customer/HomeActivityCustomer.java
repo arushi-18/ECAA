@@ -167,10 +167,10 @@ public class HomeActivityCustomer extends AppCompatActivity implements Navigatio
             }
 
         }
-        else if(id==R.id.nav_categories)
+        /*else if(id==R.id.nav_categories)
         {
 
-        }
+        }*/
         else if(id==R.id.nav_search)
         {
             if(!type.equals("Admin")) {

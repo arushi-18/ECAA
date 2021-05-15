@@ -52,7 +52,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                         holder.userEmail.setText("Email:"+model.getEmail());
                         holder.userName.setText("Name:"+model.getName());
                         holder.userPhoneNumber.setText("Phone:"+model.getPhone());
-                        holder.userTotalPrice.setText("Total Amount=Rs.:"+model.getTotalAmount());
+                        holder.userTotalPrice.setText(model.getTotalAmount());
                         holder.userDateTime.setText("Order at:"+model.getDate() + " "+model.getTime());
                         holder.userShippingAddress.setText("Shipping Address:"+model.getAddress()+","+model.getCity());
 
