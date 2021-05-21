@@ -222,8 +222,9 @@ public class SellerAddProductDetails extends AppCompatActivity
                 if (task.isSuccessful())
                 {   loadingBar.dismiss();
                     Toast.makeText(SellerAddProductDetails.this, "Product is uploaded successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(SellerAddProductDetails.this, SellerChooseCategory.class);
+                    Intent intent=new Intent(SellerAddProductDetails.this, SellerHomePage.class);
                     startActivity(intent);
+                    finish();
                 }
                 else
                 {   loadingBar.dismiss();
@@ -234,11 +235,11 @@ public class SellerAddProductDetails extends AppCompatActivity
         });
     }
 
-    /*@Override
+    @Override
     public void onBackPressed(){
-
-        Intent intent=new Intent(SellerAddProductDetails.this, SellerChooseCategory.class);
+        Intent intent=new Intent(SellerAddProductDetails.this, SellerHomePage.class);
         startActivity(intent);
-    }*/
+        finish();
+    }
 
 }

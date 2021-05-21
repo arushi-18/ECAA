@@ -74,7 +74,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                 if( (state.equals("Order Placed") || state.equals("Order shipped")))
                 {
-                    Toast.makeText(ProductDetailsActivity.this, "You can purchase more products once your order is shipped or conformed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProductDetailsActivity.this, "You can purchase more products once your order is shipped or confirmed", Toast.LENGTH_LONG).show();
                 }
                 else if(qty > num)
                 {   Toast.makeText(ProductDetailsActivity.this, "Added to cart", Toast.LENGTH_LONG).show();
@@ -178,7 +178,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private void CheckOrderState()
     {
         DatabaseReference ordersRef;
-        ordersRef=FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
+        ordersRef=FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getEmail());
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)

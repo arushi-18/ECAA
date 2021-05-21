@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ecaa.R;
+import com.example.ecaa.Seller.SellerAddProductDetails;
+import com.example.ecaa.Seller.SellerHomePage;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -234,7 +236,12 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
 
     }
-
+    @Override
+    public void onBackPressed(){
+        Intent intent=new Intent(AdminAddNewProductActivity.this, HomeActivityAdmin.class);
+        startActivity(intent);
+        finish();
+    }
 
 
 

@@ -76,23 +76,16 @@ public class HomeActivityAdmin extends AppCompatActivity {
 
     }
 
-    /*@Override
+    @Override
     public void onBackPressed() {
         if (pressedTime + 2000 > System.currentTimeMillis()) {
-            super.onBackPressed();
-            finishAffinity();
-
-            System.exit(0);
-            /*Intent a = new Intent(Intent.ACTION_MAIN);
+            Intent a = new Intent(Intent.ACTION_MAIN);
             a.addCategory(Intent.CATEGORY_HOME);
             a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(a);
-            finish();
-            /*int pid = android.os.Process.myPid();
-            android.os.Process.killProcess(pid);
         } else {
             Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
         }
         pressedTime = System.currentTimeMillis();
-    }*/
+    }
 }
